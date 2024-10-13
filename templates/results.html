@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% else %}
+        <h2>Top 5 Documents:</h2>
+        <ul>
+        {% for doc, score in documents %}
+            <li>
+                <strong>Document {{ loop.index }}</strong> (Similarity: {{ score|round(4) }})
+                <p>{{ doc }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+        <h2>Cosine Similarity Chart:</h2>
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Cosine Similarity Chart">
+    {% endif %}
+    <br>
+    <a href="/">Back to Search</a>
+</body>
+</html>
